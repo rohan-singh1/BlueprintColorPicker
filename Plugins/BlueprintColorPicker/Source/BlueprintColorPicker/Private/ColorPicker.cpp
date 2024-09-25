@@ -3,7 +3,6 @@
 // 
 // Slate color picker exposed to Blueprints
 //
-//
 // The MIT License (MIT)
 //
 // Copyright (c) 2024 Rohan Singh
@@ -29,11 +28,31 @@
 
 #include "ColorPicker.h"
 
+UColorPicker::UColorPicker(const FObjectInitializer& ObjectInitializer)
+    : Super(ObjectInitializer)
+{
+    // Set default background color to be transparent
+    BackgroundColor = FLinearColor(0.0f, 0.0f, 0.0f, 0.0f);
+
+    InitialColor = FLinearColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+    // Show full version by default
+    bShowInline = false;
+
+    // Transparency is on by default
+    bUseAlpha = true;
+
+    // Context menu mode off by default
+    bForContextMenu = false;
+}
+
 TSharedRef<SWidget> UColorPicker::RebuildWidget()
 {
     // Create the Slate color picker widget
     SlateColorPickerWidget = SNew(SColorPicker)
+        .TargetColorAttribute(InitialColor)
         .DisplayInlineVersion(bShowInline)
+        .UseAlpha(bUseAlpha)
         .OnColorCommitted_Lambda([this](const FLinearColor& NewColor)
             {
                 if (this)
@@ -63,33 +82,43 @@ TSharedRef<SWidget> UColorPicker::RebuildWidget()
                 return FReply::Handled();
             });
 
+    FSlateBrush BackgroundBrush;
+    //BackgroundBrush.DrawAs(ESlateBrushDrawType::Image);
+
+
     // Add the buttons and the color picker widget to a vertical box
-    return SNew(SVerticalBox)
-        + SVerticalBox::Slot()
-        .AutoHeight()
+    return SNew(SBorder)
+        .BorderBackgroundColor(BackgroundColor)
+        .BorderImage(FCoreStyle::Get().GetBrush("WhiteBrush"))
+        .Padding(2)
         [
-            SlateColorPickerWidget.ToSharedRef()
-        ]
-        + SVerticalBox::Slot()
-        .AutoHeight()
-        .Padding(5)
-        [
-            SNew(SHorizontalBox)
-                + SHorizontalBox::Slot()
-                .FillWidth(1.0f)
-                .HAlign(HAlign_Right)
-                .Padding(2)
-                [
-                    OkButton.ToSharedRef()
-                ]
-                + SHorizontalBox::Slot()
-                .AutoWidth()
-                .HAlign(HAlign_Right)
-                .Padding(2)
-                [
-                    CancelButton.ToSharedRef()
-                ]
-        ];
+            SNew(SVerticalBox)
+            + SVerticalBox::Slot()
+            .AutoHeight()
+            [
+                SlateColorPickerWidget.ToSharedRef()
+            ]
+            + SVerticalBox::Slot()
+            .AutoHeight()
+            .Padding(2)
+            [
+                SNew(SHorizontalBox)
+                    + SHorizontalBox::Slot()
+                    .FillWidth(1.0f)
+                    .HAlign(HAlign_Right)
+                    .Padding(2)
+                    [
+                        OkButton.ToSharedRef()
+                    ]
+                    + SHorizontalBox::Slot()
+                    .AutoWidth()
+                    .HAlign(HAlign_Right)
+                    .Padding(2)
+                    [
+                        CancelButton.ToSharedRef()
+                    ]
+            ]
+        ];   
 }
 
 void UColorPicker::ReleaseSlateResources(bool bReleaseChildren)
