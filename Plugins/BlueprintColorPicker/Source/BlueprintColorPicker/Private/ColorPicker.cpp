@@ -31,9 +31,10 @@
 UColorPicker::UColorPicker(const FObjectInitializer& ObjectInitializer)
     : Super(ObjectInitializer)
 {
-    // Set default background color to be transparent
+    // Default background color is transparent
     BackgroundColor = FLinearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
+    // Default initial color is White
     InitialColor = FLinearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
     // Show full version by default
@@ -42,7 +43,7 @@ UColorPicker::UColorPicker(const FObjectInitializer& ObjectInitializer)
     // Transparency is on by default
     bUseAlpha = true;
 
-    // Context menu mode off by default
+    // Context menu mode is off by default
     bForContextMenu = false;
 }
 
@@ -82,15 +83,11 @@ TSharedRef<SWidget> UColorPicker::RebuildWidget()
                 return FReply::Handled();
             });
 
-    FSlateBrush BackgroundBrush;
-    //BackgroundBrush.DrawAs(ESlateBrushDrawType::Image);
-
-
     // Add the buttons and the color picker widget to a vertical box
     return SNew(SBorder)
         .BorderBackgroundColor(BackgroundColor)
         .BorderImage(FCoreStyle::Get().GetBrush("WhiteBrush"))
-        .Padding(2)
+        .Padding(10)
         [
             SNew(SVerticalBox)
             + SVerticalBox::Slot()
@@ -131,6 +128,14 @@ void UColorPicker::ReleaseSlateResources(bool bReleaseChildren)
 
 void UColorPicker::HandleColorOkClicked()
 {
+    if (bForContextMenu)
+    {
+        TSharedPtr<SWindow> ActiveWindow = FSlateApplication::Get().GetActiveTopLevelWindow();
+        if (ActiveWindow.IsValid())
+        {
+            ActiveWindow->RequestDestroyWindow();
+        }
+    }
     RemoveFromParent();
 }
 
@@ -138,6 +143,15 @@ void UColorPicker::HandleColorCancelClicked(const FLinearColor& Color)
 {
     // Return initial color (Discard current color selection)
     OnColorChanged.Broadcast(Color);
+
+    if (bForContextMenu)
+    {
+        TSharedPtr<SWindow> ActiveWindow = FSlateApplication::Get().GetActiveTopLevelWindow();
+        if (ActiveWindow.IsValid())
+        {
+            ActiveWindow->RequestDestroyWindow();
+        }
+    }
     RemoveFromParent();
 }
 
