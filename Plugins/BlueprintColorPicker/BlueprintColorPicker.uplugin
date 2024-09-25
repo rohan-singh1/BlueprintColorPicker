@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "BlueprintColorPicker",
+	"Description": "The native color picker of Unreal Engine which is based in Slate exposed to Blueprints to save time and resources of developers who are not comfortable working in C++ but have knowledge of Blueprints",
+	"Category": "Other",
+	"CreatedBy": "Rohan Singh",
+	"CreatedByURL": "https://www.linkedin.com/in/rohan-sierra/",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "BlueprintColorPicker",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
