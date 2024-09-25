@@ -55,21 +55,27 @@ public:
 	// Constructor
 	UColorPicker(const FObjectInitializer& ObjectInitializer);
 
+	// Delegate to signal different color selected by the user
 	UPROPERTY(BlueprintAssignable, Category = "Blueprint Color Picker")
 	FOnColorChanged OnColorChanged;
 
+	// The initial color selected when the Color Picker widget is constructed (To show the existing color of an object)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ExposeOnSpawn = true), Category = "Blueprint Color Picker")
 	FLinearColor InitialColor;
 
+	// Background color of the Color Picker widget area
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ExposeOnSpawn = true), Category = "Blueprint Color Picker")
 	FLinearColor BackgroundColor;
 
+	// To specify whether to show a compact version of the color picker
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ExposeOnSpawn = true), Category = "Blueprint Color Picker")
 	bool bShowInline;
 
+	// To allow user to select color with transparency value
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ExposeOnSpawn = true), Category = "Blueprint Color Picker")
 	bool bUseAlpha;
 
+	// To specify whether to close the parent window (true in case of context menu)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ExposeOnSpawn = true), Category = "Blueprint Color Picker")
 	bool bForContextMenu;
 
