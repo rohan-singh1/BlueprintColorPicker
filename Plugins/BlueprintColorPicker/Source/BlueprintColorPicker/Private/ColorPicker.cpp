@@ -76,13 +76,15 @@ TSharedRef<SWidget> UColorPicker::RebuildWidget()
         [
             SNew(SHorizontalBox)
                 + SHorizontalBox::Slot()
-                .AutoWidth()
+                .FillWidth(1.0f)
+                .HAlign(HAlign_Right)
                 .Padding(2)
                 [
                     OkButton.ToSharedRef()
                 ]
                 + SHorizontalBox::Slot()
                 .AutoWidth()
+                .HAlign(HAlign_Right)
                 .Padding(2)
                 [
                     CancelButton.ToSharedRef()
