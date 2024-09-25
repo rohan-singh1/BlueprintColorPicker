@@ -26,6 +26,11 @@ public class BlueprintColorPicker : ModuleRules
 			new string[]
 			{
 				"Core",
+				"CoreUObject",
+				"Engine",
+				"UMG",
+				"Slate",
+				"AppFramework",
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
