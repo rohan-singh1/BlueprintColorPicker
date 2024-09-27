@@ -14,3 +14,7 @@ The Blueprint Color Picker is a plugin designed to integrate the Slate color pic
 1. Clone the repository to your local machine.
 2. Launch the ColorPickerDemo project in Unreal Editor.
 3. Go to *Contents* folder and right click on the editor utility widget called **Demo** in the Contents folder and click on 'Run Editor Utility Widget' in the context menu.
+
+
+Screenshot:
+![image](https://github.com/rohan-singh1/BlueprintColorPicker/blob/3b1d742a8dd1be0c8d7686d6f95505bd9058cc58/Packaged/Icon1212.png)
