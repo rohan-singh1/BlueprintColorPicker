@@ -17,4 +17,5 @@ The Blueprint Color Picker is a plugin designed to integrate the Slate color pic
 
 
 Screenshot:
+
 ![image](https://github.com/rohan-singh1/BlueprintColorPicker/blob/2973a337c93420c9e2be3727e0a55288bfb9e5f0/Packaged/Screenshot.png)
