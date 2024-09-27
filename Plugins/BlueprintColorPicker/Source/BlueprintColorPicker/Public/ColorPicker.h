@@ -29,7 +29,10 @@
 
 #include "CoreMinimal.h"
 #include "Components/Widget.h"
+#include "Framework/Application/SlateApplication.h"
 #include "Widgets/Colors/SColorPicker.h"
+#include "Widgets/Layout/SBorder.h"
+#include "Widgets/Input/SButton.h"
 #include "ColorPicker.generated.h"
 
 
