@@ -7,8 +7,8 @@ The Blueprint Color Picker is a plugin designed to integrate the Slate color pic
  - Drag & Drop to use
  - Adjustable Background Color
  - Full / Compact Mode
-- Context Menu Mode
-- Toggle Transparency (Alpha Channel)
+ - Context Menu Mode
+ - Toggle Transparency (Alpha Channel)
 
 ## How to Use:
 1. Clone the repository to your local machine.
