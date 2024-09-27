@@ -2,9 +2,10 @@
 	"FileVersion": 3,
 	"Version": 1,
 	"VersionName": "1.0",
+	"EngineVersion": "5.4",
 	"FriendlyName": "Blueprint Color Picker",
-	"Description": "Native color picker based in Slate exposed to Blueprints",
-	"Category": "Other",
+	"Description": "Native Slate based color picker exposed to Blueprints",
+	"Category": "UI",
 	"CreatedBy": "Rohan Singh",
 	"CreatedByURL": "https://www.linkedin.com/in/rohan-sierra/",
 	"DocsURL": "",
@@ -20,5 +21,12 @@
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
 		}
+	],
+	"PlatformAllowList": [
+		"Win64",
+		"Win32",
+		"Mac",
+		"IOS",
+		"Android"
 	]
 }
