@@ -36,7 +36,7 @@
 #include "ColorPicker.generated.h"
 
 
-// Declare a dynamic multicast delegate for search text changes
+// Declare a dynamic multicast delegate for color changed
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnColorChanged, const FLinearColor&, NewColor);
 
 
