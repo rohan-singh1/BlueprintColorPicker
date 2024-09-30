@@ -20,16 +20,10 @@
 			"LoadingPhase": "Default",
 			"PlatformAllowList": [
 				"Win64",
-				"Win32",
 				"Mac",
 				"Linux",
-				"HTML5",
 				"IOS",
 				"Android",
-				"Switch",
-				"HoloLens",
-				"PS5",
-				"XboxOneGDK"
 			]
 		}
 	]
