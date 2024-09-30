@@ -56,10 +56,7 @@ TSharedRef<SWidget> UColorPicker::RebuildWidget()
         .UseAlpha(bUseAlpha)
         .OnColorCommitted_Lambda([this](const FLinearColor& NewColor)
             {
-                if (this)
-                {
-                    HandleColorChanged(NewColor);
-                }
+                HandleColorChanged(NewColor);
             });
 
     // Create OK and Cancel buttons
