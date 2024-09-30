@@ -122,7 +122,7 @@ void UColorPicker::ReleaseSlateResources(bool bReleaseChildren)
 {
     Super::ReleaseSlateResources(bReleaseChildren);
 
-    // Reset the Slate search box widget to release it from memory
+    // Reset the Slate color picker widget to release it from memory
     SlateColorPickerWidget.Reset();
 }
 
