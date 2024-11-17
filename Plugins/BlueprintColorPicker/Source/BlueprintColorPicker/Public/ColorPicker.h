@@ -29,16 +29,9 @@
 
 #include "CoreMinimal.h"
 #include "Components/Widget.h"
-#include "Framework/Application/SlateApplication.h"
-#include "Widgets/Colors/SColorPicker.h"
-#include "Widgets/Layout/SBorder.h"
-#include "Widgets/Input/SButton.h"
 #include "ColorPicker.generated.h"
 
-
-// Declare a dynamic multicast delegate for color changed
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnColorChanged, const FLinearColor&, NewColor);
-
+class SColorPicker;
 
 /**
  *
@@ -57,6 +50,9 @@ public:
 
 	// Constructor
 	UColorPicker(const FObjectInitializer& ObjectInitializer);
+
+	// Declare a dynamic multicast delegate for search text changes
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnColorChanged, const FLinearColor&, NewColor);
 
 	// Delegate to signal different color selected by the user
 	UPROPERTY(BlueprintAssignable, Category = "Blueprint Color Picker")

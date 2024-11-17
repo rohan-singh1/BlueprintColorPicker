@@ -27,6 +27,10 @@
 
 
 #include "ColorPicker.h"
+#include "Framework/Application/SlateApplication.h"
+#include "Widgets/Colors/SColorPicker.h"
+#include "Widgets/Layout/SBorder.h"
+#include "Widgets/Input/SButton.h"
 
 UColorPicker::UColorPicker(const FObjectInitializer& ObjectInitializer)
     : Super(ObjectInitializer)
@@ -56,10 +60,7 @@ TSharedRef<SWidget> UColorPicker::RebuildWidget()
         .UseAlpha(bUseAlpha)
         .OnColorCommitted_Lambda([this](const FLinearColor& NewColor)
             {
-                if (this)
-                {
-                    HandleColorChanged(NewColor);
-                }
+                HandleColorChanged(NewColor);
             });
 
     // Create OK and Cancel buttons
