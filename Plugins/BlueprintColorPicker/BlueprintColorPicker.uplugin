@@ -10,7 +10,7 @@
 	"DocsURL": "",
 	"FabURL": "com.epicgames.launcher://ue/Fab/product/1dde9537-7c5f-43cd-8e4c-7abfbbd9126a",
 	"SupportURL": "",
-	"EngineVersion": "5.4.0",
+	"EngineVersion": "5.5.0",
 	"CanContainContent": true,
 	"Installed": true,
 	"Modules": [
