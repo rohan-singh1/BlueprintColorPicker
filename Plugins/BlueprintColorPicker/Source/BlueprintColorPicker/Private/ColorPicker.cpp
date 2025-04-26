@@ -49,6 +49,9 @@ UColorPicker::UColorPicker(const FObjectInitializer& ObjectInitializer)
 
     // Context menu mode is off by default
     bForContextMenu = false;
+
+    // Ok & Cancel buttons are on by default
+    bShowOkCancelButtons = true;
 }
 
 TSharedRef<SWidget> UColorPicker::RebuildWidget()
@@ -58,6 +61,10 @@ TSharedRef<SWidget> UColorPicker::RebuildWidget()
         .TargetColorAttribute(InitialColor)
         .DisplayInlineVersion(bShowInline)
         .UseAlpha(bUseAlpha)
+        .OnColorPickerCancelled_Lambda([this](FLinearColor Color)
+            {
+                HandleColorCancelClicked(Color);
+            })
         .OnColorCommitted_Lambda([this](const FLinearColor& NewColor)
             {
                 HandleColorChanged(NewColor);
@@ -70,6 +77,7 @@ TSharedRef<SWidget> UColorPicker::RebuildWidget()
     // Create button functionality
     OkButton = SNew(SButton)
         .Text(FText::FromString("OK"))
+        .ButtonStyle(&FAppStyle::Get().GetWidgetStyle<FButtonStyle>("PrimaryButton"))
         .OnClicked_Lambda([this]()
             {
                 HandleColorOkClicked();
@@ -98,22 +106,35 @@ TSharedRef<SWidget> UColorPicker::RebuildWidget()
             ]
             + SVerticalBox::Slot()
             .AutoHeight()
-            .Padding(2)
             [
-                SNew(SHorizontalBox)
-                    + SHorizontalBox::Slot()
-                    .FillWidth(1.0f)
-                    .HAlign(HAlign_Right)
+                SNew(SBox)
+                    .Visibility(bShowOkCancelButtons ? EVisibility::SelfHitTestInvisible : EVisibility::Collapsed)
                     .Padding(2)
                     [
-                        OkButton.ToSharedRef()
-                    ]
-                    + SHorizontalBox::Slot()
-                    .AutoWidth()
-                    .HAlign(HAlign_Right)
-                    .Padding(2)
-                    [
-                        CancelButton.ToSharedRef()
+                        SNew(SHorizontalBox)
+                            + SHorizontalBox::Slot()
+                            .FillWidth(1.0f)
+                            [
+                                SNew(SBox)
+                            ]
+                            + SHorizontalBox::Slot()
+                            .AutoWidth()
+                            .HAlign(HAlign_Right)   
+                            [
+                                SNew(SBox)
+                                    .Padding(2)
+                                    .Visibility(!bForContextMenu ? EVisibility::SelfHitTestInvisible : EVisibility::Collapsed)
+                                    [
+                                        OkButton.ToSharedRef()
+                                    ]         
+                            ]
+                            + SHorizontalBox::Slot()
+                            .AutoWidth()
+                            .HAlign(HAlign_Right)
+                            .Padding(2)
+                            [
+                                CancelButton.ToSharedRef()
+                            ]
                     ]
             ]
         ];   
@@ -129,14 +150,7 @@ void UColorPicker::ReleaseSlateResources(bool bReleaseChildren)
 
 void UColorPicker::HandleColorOkClicked()
 {
-    if (bForContextMenu)
-    {
-        TSharedPtr<SWindow> ActiveWindow = FSlateApplication::Get().GetActiveTopLevelWindow();
-        if (ActiveWindow.IsValid())
-        {
-            ActiveWindow->RequestDestroyWindow();
-        }
-    }
+    // Remove widget from parent if not spawned as contetx menu
     RemoveFromParent();
 }
 
@@ -145,15 +159,17 @@ void UColorPicker::HandleColorCancelClicked(const FLinearColor& Color)
     // Return initial color (Discard current color selection)
     OnColorChanged.Broadcast(Color);
 
+    // If in context menu mode emit close request signal so that the context menu
+    // may be closed from the Blueprint.
     if (bForContextMenu)
     {
-        TSharedPtr<SWindow> ActiveWindow = FSlateApplication::Get().GetActiveTopLevelWindow();
-        if (ActiveWindow.IsValid())
-        {
-            ActiveWindow->RequestDestroyWindow();
-        }
+        OnContextMenuCloseRequested.Broadcast();
     }
-    RemoveFromParent();
+    // Else remove from the parent widget
+    else
+    {
+        RemoveFromParent();
+    }
 }
 
 void UColorPicker::HandleColorChanged(const FLinearColor& NewColor)

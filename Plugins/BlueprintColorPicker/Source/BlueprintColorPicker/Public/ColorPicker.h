@@ -54,9 +54,16 @@ public:
 	// Declare a dynamic multicast delegate for search text changes
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnColorChanged, const FLinearColor&, NewColor);
 
+	// Declare a dynamic multicast delegate to signal Cancel button clicked when in context menu mode
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnContextMenuCloseRequested);
+
 	// Delegate to signal different color selected by the user
 	UPROPERTY(BlueprintAssignable, Category = "Blueprint Color Picker")
 	FOnColorChanged OnColorChanged;
+
+	// Delegate to signal Ccancel button clicked while in context menu mode
+	UPROPERTY(BlueprintAssignable, Category = "Blueprint Color Picker")
+	FOnContextMenuCloseRequested OnContextMenuCloseRequested;
 
 	// The initial color selected when the Color Picker widget is constructed (To show the existing color of an object)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ExposeOnSpawn = true), Category = "Blueprint Color Picker")
@@ -77,6 +84,10 @@ public:
 	// To specify whether to close the parent window (true in case of context menu)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ExposeOnSpawn = true), Category = "Blueprint Color Picker")
 	bool bForContextMenu;
+
+	// To specify whether to show or hide OK and Cancel buttons
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ExposeOnSpawn = true), Category = "Blueprint Color Picker")
+	bool bShowOkCancelButtons;
 
 private:
 	TSharedPtr<SColorPicker> SlateColorPickerWidget;
