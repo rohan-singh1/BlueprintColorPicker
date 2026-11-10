@@ -30,6 +30,7 @@
 #include "Framework/Application/SlateApplication.h"
 #include "Widgets/Colors/SColorPicker.h"
 #include "Widgets/Layout/SBorder.h"
+#include "Widgets/Layout/SBox.h"
 #include "Widgets/Input/SButton.h"
 
 UColorPicker::UColorPicker(const FObjectInitializer& ObjectInitializer)
